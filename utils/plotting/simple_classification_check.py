@@ -4,7 +4,7 @@ from itertools import cycle
 import numpy as np
 
 
-def plot_result(Xi_ref, gmm, est_K):
+def plot_result(Xi_ref, gmm, est_K, Mu):
     plt.figure()
     ax = plt.subplot(111)
     cycol = cycle('bgrcmky')
@@ -16,4 +16,7 @@ def plot_result(Xi_ref, gmm, est_K):
         colors.append(next(cycol))
 
     plot_error_ellipses(ax, gmm, alpha=0.1, colors=colors)
+    for num in np.arange(0, len(Mu[0])):
+        plt.text(Mu[0][num], Mu[1][num], str(num+1), fontsize=20)
+
     plt.show()

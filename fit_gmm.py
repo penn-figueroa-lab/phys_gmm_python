@@ -52,6 +52,8 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
         for i in np.arange(0, len_of_Xi_dot):
             for j in np.arange(0, len_of_Xi_dot):
                 cos_angle = (np.dot(Xi_dot_ref[:, i], Xi_dot_ref[:, j])) / (np.linalg.norm(Xi_dot_ref[:, i]) * np.linalg.norm(Xi_dot_ref[:, j]))
+                if np.isnan(cos_angle):
+                    cos_angle = 0
                 s = 1 + cos_angle
 
                 # Compute Position component
@@ -119,7 +121,8 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
                 Priors[k] = assigned_k / N
             print(np.sum(Priors))
         gmm = GMM(est_K, Priors, Mu.T, Sigma)
-        plot_result(Xi_ref, gmm, est_K)
+        plot_result(Xi_ref, gmm, est_K, Mu)
+        return Priors, Mu, Sigma
 
 
 

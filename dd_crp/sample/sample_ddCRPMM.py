@@ -51,7 +51,6 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
 
     # Sample random permutation of observations \tau of [1,..,N]
     tau = np.random.permutation(N)  # generate python style index, permutation 0 to N - 1
-    # tau = np.arange(0, N)
     # For every i-th randomly sampled observation sample a new cluster
     # assignment c_i
     # 注意，C与Z_C使用的都是标准matlab index，C表示你和谁坐，用matlab的index表示，
@@ -62,7 +61,8 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
         # Step 1: "Remove" the c_i, i.e. the outgoing link of customer i #
         # to do this, set its cluster to c_i, and set its connected customers to c_i
         ##################################################################
-        ci_old = C[c_i]  # document who it sits with, if obs 1 sit itself it will be ci_old = C[0] = 1
+        ci_old = C[c_i]
+        # document who it sits with, if obs 1 sit itself it will be ci_old = C[0] = 1
         helper = int(Z_C[c_i][0])  # get the table belonging
         old_conn_customers = table_members[helper - 1]  # for exp: if Z_C[0] = 1, the it is related to index 0
 
@@ -165,7 +165,6 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
         cond_prob = np.cumsum(cond_prob)  # from pdf to cdf
         helper = np.argwhere(cond_prob > rand_values)
         c_i_sample = np.argwhere(cond_prob > rand_values)[0][0]
-        # c_i_sample = np.argwhere(cond_prob > 0.49114514)[0][0]
         # caution: c_i_sample return the <index> of sitting with
         # if c_i_sample = 0 it will sit with data point 1
 
