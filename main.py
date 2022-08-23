@@ -23,10 +23,23 @@ Y_bar = np.mean(V1, axis=1, keepdims=True)
 print(Y_bar)
 print(Y_bar * Y_bar.T)"""
 # C1 = np.zeros((2,2,3))
+"""A = np.array([1, 5, 3, 4])
+print(all(sorted(A) == A))
 colors = []
 cycol = cycle('bgrcmky')
 for i in np.arange(0, 4):
-    colors.append(next(cycol))
+    colors.append(next(cycol))"""
+
+p1 = []
+p1.append(2)
+p1.append(3)
+print(np.array(p1))
+
+y = np.array([1, 2, 4, 3])
+indx = y.argsort()
+print(indx)
+y.sort()
+print(y)
 
 A = np.array([[1, 3, 2],
               [4, 2, 5],

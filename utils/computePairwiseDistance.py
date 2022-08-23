@@ -19,7 +19,7 @@ def compute(X, display_hist):
     end = time.perf_counter()
     mean_D = np.mean(D)
     max_D = np.max(D)
-    hist, bin_edges = np.histogram(D, bins=70)  # caution change bins to adjust result
+    hist, bin_edges = np.histogram(D, bins='auto')  # caution change bins to adjust result
     max_values_id = np.argmax(hist)
     print("pair calculations take: {}, mean is {}, max is {}".format(start - end, mean_D, max_D))
     return D, bin_edges[max_values_id], mean_D
