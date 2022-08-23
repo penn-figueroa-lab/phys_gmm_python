@@ -5,3 +5,6 @@ Notes for first Edition: Only implement for datasets of 2D and option 'full'.
                          Z_C means which table the member sits, Z_C[0] = 1 means the first data point sits at table 1
                          C means which datapoint current datapoint sit with, C[0] = 1 means first data point (access by index 0) sits with itself
                          if you want to access table member, likelihood, the index should be minus 1, table_Logliks[0] stores the likelihood of table 1
+Dependencies:
+- Scipy: https://scipy.org/install/
+- Gmr: https://github.com/AlexanderFabisch/gmr
