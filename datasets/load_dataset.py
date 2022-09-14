@@ -45,7 +45,17 @@ def load_dataset(pkg_dir, dataset, sub_sample, nb_trajectories):
             data_ = np.array(data[0][n])
             Data = np.concatenate((Data, data_), axis=1)
     else:
-        print("we dont currently offer this function")
+        data_ = loadmat(r"{}".format(final_dir))
+        data_ = np.array(data_["data"])
+        N = len(data_)
+        traj = np.random.choice(np.arange(N), nb_trajectories, replace=False)
+        data = data_[traj]
+        for l in np.arange(nb_trajectories):
+            data[l][0] = data[l][0][:, ::sub_sample]
+            if l == 0:
+                Data = data[l][0]
+            else:
+                Data = np.concatenate((Data, data[l][0]), axis=1)
 
     return Data
 

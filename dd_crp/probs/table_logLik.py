@@ -2,6 +2,7 @@ import numpy as np
 from scipy.special import multigammaln, gammaln
 
 
+# checked
 def table_logLik(Y, Lambda, type):
     M = len(Y)  # dimension
     N = len(Y[0])  # number of sample

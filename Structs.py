@@ -4,7 +4,7 @@ import numpy as np
 class Est_options:
     type = 0
     # for algo 0(DD-CRP) selected
-    maxK = 0
+    maxK = 15
     fixed_K = 0
     # algo 0 or 2 selected:
     samplerIter = 40  # Maximum Sampler Iterations

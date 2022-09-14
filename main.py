@@ -29,7 +29,9 @@ colors = []
 cycol = cycle('bgrcmky')
 for i in np.arange(0, 4):
     colors.append(next(cycol))"""
-
+p1 = np.array([[1, 2, 3],[1, 2, 3]])
+print(np.repeat(p1[0, :].reshape(1, len(p1[0])), 2, axis=0))
+print(np.repeat(np.sum(p1, axis=0, keepdims=True), 5, axis=0))
 p1 = []
 p1.append(2)
 p1.append(3)

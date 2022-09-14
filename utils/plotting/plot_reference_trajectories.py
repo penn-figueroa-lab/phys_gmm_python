@@ -19,6 +19,20 @@ def plot_reference_trajectories(Data, vel_sample, vel_size):
             V[i] = dir_[1]
         q = ax.quiver(vel_points[0], vel_points[1], U, V, width=0.005, scale=vel_size)
 
-    # plt.show()
+    else:
+        ax = fig.add_subplot(projection='3d')
+        ax.plot(Data[0], Data[1], Data[2], 'ro', markersize=1.5)
+        ax.axis('auto')
+        vel_points = Data[:, ::vel_sample]
+        U = np.zeros(len(vel_points[0]))
+        V = np.zeros(len(vel_points[0]))
+        W = np.zeros(len(vel_points[0]))
+        for i in np.arange(0, len(vel_points[0])):
+            dir_ = vel_points[3:, i] / np.linalg.norm(vel_points[3:, i])
+            U[i] = dir_[0]
+            V[i] = dir_[1]
+            W[i] = dir_[2]
+        q = ax.quiver(vel_points[0], vel_points[1], vel_points[2], U, V, W, length=0.04, normalize=True,colors='k')
 
-# get more function on 3D
+    plt.show()
+

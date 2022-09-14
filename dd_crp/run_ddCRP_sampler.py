@@ -14,7 +14,7 @@ from dd_crp.sample.sample_TableParams import sample_TableParams
          
  **Outputs**
           Psi (MAP Markov Chain State)
-          Psi.LogProb:
+          Psi.LogProb: 
           Psi.Z_C:
           Psi.clust_params:
           Psi.iter:
@@ -95,6 +95,7 @@ def run_ddCRP_sampler(Y, S, options):
         current_table_LogLik = table_logLik(Y_in, Lambda, type)
         table_logLiks.append(current_table_LogLik)
 
+    # things above should be OK.
     # Load initial variables
     Psi = Psis()
     Psi.C = C
