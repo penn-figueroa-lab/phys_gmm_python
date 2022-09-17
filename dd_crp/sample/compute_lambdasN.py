@@ -36,7 +36,7 @@ def compute_lambdasN(Y, Z_C, Lambda, type):
         Ybar_mu = Ybar - mu_0
         helper = mu_N[:, k]
         # Compute Mean Parameters K-th table
-        mu_N[:, k] = ((kappa_0 * mu_0 + YbarN) / (kappa_0 + N)).reshape(2)
+        mu_N[:, k] = ((kappa_0 * mu_0 + YbarN) / (kappa_0 + N)).reshape(len(Y))  # 从2改成了lenY
 
         # Compute Kappa Parameters K-th table
         kappa_N[k] = kappa_0 + N

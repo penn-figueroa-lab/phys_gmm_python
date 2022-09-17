@@ -6,6 +6,7 @@ from dd_crp.run_ddCRP_sampler import run_ddCRP_sampler
 from gmm_stuff.my_gmm_cluster import my_gmm_cluster
 from gmr import GMM
 from utils.plotting.simple_classification_check import plot_result
+from utils.plotting.plot_ellopsoid import plot_result_3D
 
 
 def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
@@ -120,8 +121,14 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
                 assigned_k = np.sum(est_labels == unique_labels[k] + 0)
                 Priors[k] = assigned_k / N
             print(np.sum(Priors))
-        gmm = GMM(est_K, Priors, Mu.T, Sigma)
-        plot_result(Xi_ref, gmm, est_K, Mu)
+
+        if len(Xi_ref) == 2:
+            gmm = GMM(est_K, Priors, Mu.T, Sigma)
+            plot_result(Xi_ref, gmm, est_K, Mu, len(Xi_ref))
+        else:
+            plot_result_3D(Mu, Sigma, Xi_ref)
+            np.save('Mu_3D.npy', Mu)
+            np.save('Sigma_3D.npy', Sigma)
         return Priors, Mu, Sigma
 
 
