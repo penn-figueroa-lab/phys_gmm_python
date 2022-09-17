@@ -72,7 +72,7 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
         new_conn_customers = get_Connections(C, c_i)
         # return <index> of the connection
         if len(new_conn_customers) != len(old_conn_customers):
-            # Increase number of tables
+            # Increase number of tables (I think this block works good 09/17/2022)
             K = K + 1
 
             # Adding new customer cycle as new table and removing other
@@ -82,11 +82,11 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
             # new, note 老的在新的里的东西，移除了老table里被分出去的部分，也就是完成了顾客的分流
             indexs = indexs + 0  # convert Boolean array to Integer array
             indexs = np.argwhere(indexs == 1)
-            indexs = indexs.reshape(len(indexs))
-            table_members[Z_C[c_i][0] - 1] = np.delete(table_members[Z_C[c_i][0] - 1], indexs.reshape(len(indexs)))
+            indexs = indexs.reshape(len(indexs)) # just for checking
+            table_members[Z_C[c_i][0] - 1] = np.delete(table_members[Z_C[c_i][0] - 1], indexs.reshape(len(indexs))) # 对的
 
             # Creating new table
-            Z_C[new_conn_customers] = K
+            Z_C[new_conn_customers] = K # 对的
 
             # Likelihood of old table without c_i
             # (recompute likelihood of customers sitting without c_i)
@@ -100,7 +100,10 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
             # (compute likelihood of new customers sitting with c_i)
             members = np.argwhere(Z_C == new_table_id)
             Y_in = Y[:, members[:, 0]]
-            table_logLiks.append(table_logLik(Y_in, Lambda, type))
+            if K > len(table_logLiks):
+                table_logLiks.append(table_logLik(Y_in, Lambda, type))
+            else:
+                table_logLiks[K-1] = table_logLik(Y_in, Lambda, type)
 
         #########################################
         # Compute priors p(c_i = j | S, \alpha) #
