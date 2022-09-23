@@ -124,18 +124,18 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
             print(np.sum(Priors))
 
         # Re-estimate GMM parameters, needed for >2D
-        # if M > 2:
-        #     Mu_k = Mu.copy()
-        #     Sigma_k = Sigma.copy()
-        #     for k in np.arange(len(unique_labels)):
-        #         cluster_points = Xi_ref[:, est_labels == unique_labels[k]]
-        #         if len(cluster_points) != 0:
-        #             V_k, L_k, Mu_k[:, k] = my_pca(cluster_points)
-        #             Sigma_k[k] = V_k @ L_k @ V_k.T
-        #     rel_dilation_fact = 0.15
-        #     Sigma_k = adjust_Covariances(Priors, Sigma_k, 1, rel_dilation_fact)
-        #     Mu = Mu_k
-        #     Sigma = Sigma_k
+        if M > 2:
+            Mu_k = Mu.copy()
+            Sigma_k = Sigma.copy()
+            for k in np.arange(len(unique_labels)):
+                cluster_points = Xi_ref[:, est_labels == unique_labels[k]]
+                if len(cluster_points) != 0:
+                    V_k, L_k, Mu_k[:, k] = my_pca(cluster_points)
+                    Sigma_k[k] = V_k @ L_k @ V_k.T
+            rel_dilation_fact = 0.15
+            Sigma_k = adjust_Covariances(Priors, Sigma_k, 1, rel_dilation_fact)
+            Mu = Mu_k
+            Sigma = Sigma_k
 
         if len(Xi_ref) == 2:
             gmm = GMM(est_K, Priors, Mu.T, Sigma)
