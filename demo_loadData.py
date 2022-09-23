@@ -10,7 +10,7 @@ from gmm_stuff.my_gaussPDF import my_gaussPDF
 # Step 1 (DATA LOADING): Load Datasets
 plt.close("all")  # maybe need further close
 pkg_dir = r'E:\ds-opt-python\ds-opt-python\phys_gmm_python'
-chosen_dataset = 9
+chosen_dataset = 11
 sub_sample = 2  # % '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 7  # For real 3D data
 Data = load_dataset(pkg_dir, chosen_dataset, sub_sample, nb_trajectories)

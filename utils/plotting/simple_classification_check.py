@@ -20,6 +20,6 @@ def plot_result(Xi_ref, gmm, est_K, Mu, dim):
         for num in np.arange(0, len(Mu[0])):
             plt.text(Mu[0][num], Mu[1][num], str(num+1), fontsize=20)
     else:
-        sb = 1
+        helper = 1
 
     plt.show()

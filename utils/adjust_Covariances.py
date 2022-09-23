@@ -19,8 +19,8 @@ def adjust_Covariances(Priors, Sigma, tot_scale_fact, rel_scale_fact):
         Vs[k] = v.copy()
         if not all(sorted(w) == w):
             ids = w.argsort()
-            L_ = w.sort()
-            Ls[k] = np.diag(w)
+            L_ = np.sort(w)
+            Ls[k] = np.diag(L_)
             Vs[k] = Vs[k, :, ids]
 
         if Priors[k] > baseline_prior:
@@ -32,7 +32,8 @@ def adjust_Covariances(Priors, Sigma, tot_scale_fact, rel_scale_fact):
         p1_eig.append(lambda_1)
         p2_eig.append(lambda_2)
         if dim == 3:
-            lambda_3 = Ls[k][3][3]
+            lambda_3 = Ls[k][2][2]
+            p3_eig.append(lambda_3)
         Sigma[k] = Vs[k] @ Ls[k] @ Vs[k].T
 
     p1_eig = np.array(p1_eig)
@@ -47,6 +48,16 @@ def adjust_Covariances(Priors, Sigma, tot_scale_fact, rel_scale_fact):
                 lambda_2 = p2_eig[k]
                 lambda_1_ = lambda_1 + lambda_2 * (rel_scale_fact - cov_ratios[k])
                 Sigma[k] = Vs[k] @ np.diag([lambda_1_, lambda_2]) @ Vs[k].T
+    elif dim == 3:
+        cov_ratios = np.array(p2_eig / p3_eig)
+        for k in np.arange(0, est_K):
+            if cov_ratios[k] < rel_scale_fact:
+                lambda_1 = p1_eig[k]
+                lambda_2 = p2_eig[k]
+                lambda_3 = p3_eig[k]
+                lambda_2_ = lambda_2 + lambda_3 * (rel_scale_fact - cov_ratios[k])
+                lambda_1_ = lambda_1 + lambda_3 * (rel_scale_fact - cov_ratios[k])
+                Sigma[k] = Vs[k] @ np.diag([lambda_1_, lambda_2_, lambda_3]) @ Vs[k].T
 
     return Sigma
 

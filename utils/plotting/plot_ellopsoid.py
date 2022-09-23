@@ -11,7 +11,7 @@ def plot_result_3D(Mu_s, Sigma_s, Y):
     ax = fig.add_subplot(111, projection='3d')
 
     if Y is not None:
-        ax.scatter(Y[0], Y[1], Y[2], c='b')
+        ax.plot(Y[0], Y[1], Y[2], 'g*', markersize=3)
 
     # set colour map so each ellipsoid as a unique colour
     norm = colors.Normalize(vmin=0, vmax=len(Mu_s[0]))
@@ -39,7 +39,8 @@ def plot_result_3D(Mu_s, Sigma_s, Y):
             for j in range(len(x)):
                 [x[i, j], y[i, j], z[i, j]] = np.dot([x[i, j], y[i, j], z[i, j]], rotation) + center
 
-        ax.plot_surface(x, y, z, rstride=3, cstride=3, color=m.to_rgba(indx), linewidth=0.1, alpha=0.7, shade=True) # alpha = 1
+        ax.plot_surface(x, y, z, rstride=3, cstride=3, color=m.to_rgba(indx), linewidth=0.1, alpha=0.5, shade=True) # alpha = 1
+        ax.text(Mu_s[0][indx], Mu_s[1][indx], Mu_s[2][indx], str(indx + 1), fontsize=20)
     plt.show()
 
 
