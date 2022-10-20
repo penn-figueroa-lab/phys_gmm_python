@@ -1,7 +1,16 @@
 # phys-gmm-python
 This package contains the inference implementation (Gibbs Sampler) for the "Physically Consistent Bayesian Non-Parametric Mixture Model" (PC-GMM) proposed in [1]. This approach is used to **automatically** (no model selection!) fit GMM on **trajectory data** while ensuring that the points clustered in each Gaussian represent/follow a linear dynamics model, in other words the points assigned to each Gaussian should be close in "position"-space and follow the same direction in "velocity"-space.
 
+### Instructions and Content for Python User (Beta Edition)
+This package offers a nice way to cluster the robot trajectory data in 2D and 3D space based on their similarity measured by their velocities and locations. 
+If you want to see the demonstration set by us, you should open the demo_loadData.py. 
 
+```Python
+pkg_dir = r'E:\ds-opt-python\ds-opt-python\phys_gmm_python'
+chosen_dataset = 12
+sub_sample = 2  # % '>2' for real 3D Datasets, '1' for 2D toy datasets
+nb_trajectories = 7  # For real 3D data
+```
 ### Image Gallary
 
 ![image](https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png)
