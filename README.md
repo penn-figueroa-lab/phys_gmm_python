@@ -1,7 +1,6 @@
 # phys-gmm-python
+This package contains the inference implementation (Gibbs Sampler) for the "Physically Consistent Bayesian Non-Parametric Mixture Model" (PC-GMM) proposed in [1]. This approach is used to **automatically** (no model selection!) fit GMM on **trajectory data** while ensuring that the points clustered in each Gaussian represent/follow a linear dynamics model, in other words the points assigned to each Gaussian should be close in "position"-space and follow the same direction in "velocity"-space.
 
-Notes for Alpha Edition: Support 3D and 2D dataset and option 'full'.
-The skeletons have been implemented, later I will add more details in plotted figure, which will be really cool
 
 ### Image Gallary
 
@@ -26,11 +25,9 @@ The skeletons have been implemented, later I will add more details in plotted fi
 </>
 
 
-Notes for first Edition: Only implement for datasets of 2D and option 'full'.
-                         Most code follow the style like Matlab, use class to mimic the struct
-                         Z_C means which table the member sits, Z_C[0] = 1 means the first data point sits at table 1
-                         C means which datapoint current datapoint sit with, C[0] = 1 means first data point (access by index 0) sits with itself
-                         if you want to access table member, likelihood, the index should be minus 1, table_Logliks[0] stores the likelihood of table 1
+**References**    
+> [1] Figueroa, N. and Billard, A. (2018) "A Physically-Consistent Bayesian Non-Parametric Mixture Model for Dynamical System Learning". In Proceedings of the 2nd Conference on Robot Learning (CoRL). 
+
 Dependencies:
 - Scipy: https://scipy.org/install/
 - Gmr: https://github.com/AlexanderFabisch/gmr
