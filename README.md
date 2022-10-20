@@ -2,20 +2,34 @@
 This package contains the inference implementation (Gibbs Sampler) for the "Physically Consistent Bayesian Non-Parametric Mixture Model" (PC-GMM) proposed in [1]. This approach is used to **automatically** (no model selection!) fit GMM on **trajectory data** while ensuring that the points clustered in each Gaussian represent/follow a linear dynamics model, in other words the points assigned to each Gaussian should be close in "position"-space and follow the same direction in "velocity"-space.
 
 ### Instructions and Content for Python User (Beta Edition)
-This package offers a nice way to cluster the robot trajectory data in 2D and 3D space based on their similarity measured by their velocities and locations. 
-If you want to see the demonstration set by us, you should open the demo_loadData.py. 
+This package offers a nice way to cluster the robot trajectory data in 2D and 3D space based on their similarity measured by their velocities and locations.
 
+If you want to see the demonstration set by us, you should open the demo_loadData.py and check the following settings.
 ```Python
 pkg_dir = r'E:\ds-opt-python\ds-opt-python\phys_gmm_python'
 chosen_dataset = 12
 sub_sample = 2  # % '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 7  # For real 3D data
 ```
+As illustrated above, the ```Python pkg_dir ``` should be set to the package root. 
+We now offer datasets from 2D to 3D. Numbers 6-10 represent 5 different demo 2D datasets and numbers 11 and 12 represent two 3D datasets.
+To reduce computation time you may set the sub_sample to be 2 in the 3D dataset to reduce the number of samples.
+In real 3D data, there will be many trajectories, to randomly pick a specific amount of them you could change the ```nb_trajectories```.
+After finishing the above setting you could run the program and check the result.
+
+If you want to use it in your data, please arrange you data in the following styles:
+
+
 ### Image Gallary
 
 ![image](https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png)
 <p align="center">
+ ![image](https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png)
   **L-shape**
+ ![image](https://user-images.githubusercontent.com/97799818/190874280-3fdd430d-9e65-4756-96c7-9afc9697cbeb.png)
+  **A-shape**
+ ![image](https://user-images.githubusercontent.com/97799818/190873962-0e82256d-5057-44bb-b33a-b9f18519bfb7.png)
+ **S-shape**
 </>
 
 ![image](https://user-images.githubusercontent.com/97799818/190874280-3fdd430d-9e65-4756-96c7-9afc9697cbeb.png)
