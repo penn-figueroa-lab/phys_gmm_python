@@ -10,6 +10,7 @@ from utils.plotting.plot_ellopsoid import plot_result_3D
 from utils.linalg.my_pca import my_pca
 from utils.adjust_Covariances import adjust_Covariances
 
+
 def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
     est_type = est_options.type
     do_plots = est_options.do_plots
