@@ -24,7 +24,7 @@ If you want to use it in your data, please arrange you data in the following sty
 
 ![image](https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png)
 <p align="center">
- ![image](https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png)
+ <img src="https://user-images.githubusercontent.com/97799818/190874177-67d995b9-b105-47f6-83b0-045c5b0d54f8.png" width="220">
   **L-shape**
  ![image](https://user-images.githubusercontent.com/97799818/190874280-3fdd430d-9e65-4756-96c7-9afc9697cbeb.png)
   **A-shape**
