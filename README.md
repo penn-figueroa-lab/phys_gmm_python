@@ -16,7 +16,7 @@ nb_trajectories = 7  # For real 3D data
    - We now offer datasets from 2D to 3D. Numbers 6-10 represent 5 different demo 2D datasets and numbers 11 and 12 represent two 3D datasets.  
    - To reduce computation time you may set the sub_sample to be 2 in the 3D dataset to reduce the number of samples.  
    - In real 3D data, there will be many trajectories. To randomly pick a specific amount of them you could change the ```nb_trajectories```.  
-   - After finishing the above setting you could run the program and check the result.  
+   - After finishing the above settings you could run the program and check the result.  
 
 **To plug in your own data:**
 - Arrange your data in this format
