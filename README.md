@@ -5,7 +5,7 @@ This package contains the inference implementation (Gibbs Sampler) for the "Phys
 This package offers a nice way to cluster the robot trajectory data in 2D and 3D space based on their similarity measured by their velocities and locations.  
 A more user friendly interface will be developed soon.  
 
-**If you want to see the demonstration set by us, you should open the demo_loadData.py and check the following settings.**  
+**To check the demonstrations, open the demo_loadData.py and check the following settings.**  
 ```Python
 pkg_dir = r'E:\ds-opt-python\ds-opt-python\phys_gmm_python'
 chosen_dataset = 12
@@ -18,7 +18,7 @@ nb_trajectories = 7  # For real 3D data
    - In real 3D data, there will be many trajectories. To randomly pick a specific amount of them you could change the ```nb_trajectories```.  
    - After finishing the above setting you could run the program and check the result.  
 
-**If you want to use your own data:**
+**To plug in your own data:**
 - Arrange your data in this format
   <p align="center">
      <img src="https://user-images.githubusercontent.com/97799818/197041947-701c3b95-0772-44cf-8b93-3f1bc8188ace.jpg" width="660">
