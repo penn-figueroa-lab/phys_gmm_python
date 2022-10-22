@@ -9,7 +9,7 @@ A more user friendly interface will be developed soon.
 ```Python
 pkg_dir = r'E:\ds-opt-python\ds-opt-python\phys_gmm_python'
 chosen_dataset = 12
-sub_sample = 2  # % '>2' for real 3D Datasets, '1' for 2D toy datasets
+sub_sample = 2  # '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 7  # For real 3D data
 ```
    - ``` pkg_dir ```  Change it to the package root.  
