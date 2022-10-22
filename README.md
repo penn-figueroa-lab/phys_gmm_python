@@ -12,10 +12,10 @@ chosen_dataset = 12
 sub_sample = 2  # % '>2' for real 3D Datasets, '1' for 2D toy datasets
 nb_trajectories = 7  # For real 3D data
 ```
-   - Change ```Python pkg_dir ``` to the package root.  
-   - We now offer datasets from 2D to 3D. Numbers 6-10 represent 5 different demo 2D datasets and numbers 11 and 12 represent two 3D datasets.  
-   - To reduce computation time you may set the sub_sample to be 2 in the 3D dataset to reduce the number of samples.  
-   - In real 3D data, there will be many trajectories. To randomly pick a specific amount of them you could change the ```nb_trajectories```.  
+   - ``` pkg_dir ```  Change it to the package root.  
+   - ```chosen_dataset``` We now offer datasets from 2D to 3D. Numbers 6-10 represent 5 different demo 2D datasets and numbers 11 and 12 represent two 3D datasets.  
+   - ```sub_sample``` To reduce computation time, you may set the it to be 2 in the 3D dataset to reduce the number of samples.  
+   - ```nb_trajectories``` In real 3D data, there will be many trajectories. To randomly pick a specific amount of them you could change the ```nb_trajectories```.  
    - After finishing the above settings you could run the program and check the result.  
 
 **To plug in your own data:**
