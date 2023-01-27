@@ -18,5 +18,10 @@ def get_Connections(C, i):
     return customers
 
 
+if __name__ == '__main__':
+    C_cur = np.array([1, 2, 1, 4, 4, 6])
+    print(np.argwhere(C_cur == 1))
+    print(get_Connections(C_cur, 0))
+    print(get_Connections(C_cur, 3))
 
 

@@ -5,6 +5,7 @@ from dd_crp.probs.table_logLik import table_logLik
 from dd_crp.sample.sample_ddCRPMM import sample_ddCRPMM
 from dd_crp.probs.logPr_spcmCRP import logPr_spcmCRP
 from dd_crp.sample.sample_TableParams import sample_TableParams
+from scipy.io import loadmat
 """
  Distance Dependent Chinese Restaurant Process Mixture Model.
  **Inputs**
@@ -80,7 +81,7 @@ def run_ddCRP_sampler(Y, S, options):
 
     # Augment Similarity Matrix with alpha on diagonal
     S = S + np.eye(N) * alpha
-    # S_alpha = num2cell(S,2)
+    # S_alpha = num2cell(S,2) # 把每一行变成一个元素，matlab里
 
     # Compute Initial Customer/Table Assignments and Likelihoods
     table_members = []
@@ -137,6 +138,7 @@ def run_ddCRP_sampler(Y, S, options):
             Psi.Maxiter = i
 
     Psi.Z_C = psi_Stats.TableAssign[Psi.Maxiter]
+    # Psi.Z_C = loadmat(r'E:\ds-opt-python\\ds-opt-python\develop_utils\est_labels.mat')['est_labels'].reshape(-1)
     Psi.Theta = sample_TableParams(Y, Psi.Z_C, Lambda, type)
 
     if options.verbose == 1:

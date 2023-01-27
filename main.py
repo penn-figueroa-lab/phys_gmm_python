@@ -29,6 +29,11 @@ colors = []
 cycol = cycle('bgrcmky')
 for i in np.arange(0, 4):
     colors.append(next(cycol))"""
+U, D, VT = np.linalg.svd([[0, 0, 0], [0, 0, -1], [0, 1, 0]])
+sb = np.array([1, 2, 3, 4, 5])
+sb1 = np.array([1, 3, 3, 3, 5])
+print((sb == sb1)+0)
+print(np.argwhere(sb1 == 3).reshape(-1))
 p1 = np.array([[1, 2, 3],[1, 2, 3]])
 print(np.sum(p1, axis=1))
 print(np.mean(p1, axis=0, keepdims=True))
@@ -52,6 +57,7 @@ A = np.delete(A, 1, 1)
 print(A)
 #print(np.sum(A,axis = 1,keepdims=True))
 # print(np.argmax(A[0]))
+
 
 print(np.linspace(0, 5, 10, endpoint=False))
 C = np.array([[1],[1]]) + 2

@@ -4,7 +4,7 @@ import numpy as np
 def adjust_Covariances(Priors, Sigma, tot_scale_fact, rel_scale_fact):
     # Check Relative Covariance Matrix Eigenvalues
     est_K = len(Sigma)
-    dim = len(Sigma[0][0])
+    dim = np.shape(Sigma)[1]
     Vs = np.zeros((est_K, dim, dim))
     Ls = np.zeros((est_K, dim, dim))
     p1_eig = []
@@ -21,7 +21,7 @@ def adjust_Covariances(Priors, Sigma, tot_scale_fact, rel_scale_fact):
             ids = w.argsort()
             L_ = np.sort(w)
             Ls[k] = np.diag(L_)
-            Vs[k] = Vs[k, :, ids]
+            Vs[k] = Vs[k][:, ids]
 
         if Priors[k] > baseline_prior:
             Ls[k] = tot_scale_fact * Ls[k]

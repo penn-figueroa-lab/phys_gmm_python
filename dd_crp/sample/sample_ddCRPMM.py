@@ -51,26 +51,28 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
 
     # Sample random permutation of observations \tau of [1,..,N]
     tau = np.random.permutation(N)  # generate python style index, permutation 0 to N - 1
+    # tau = np.arange(N)
     # For every i-th randomly sampled observation sample a new cluster
     # assignment c_i
     # 注意，C与Z_C使用的都是标准matlab index，C表示你和谁坐，用matlab的index表示，
     # Z_C是你在哪张桌子上
     for i in np.arange(0, N):
-        c_i = tau[i]
+        c_i = tau[i] # c_i 是python index
         ##################################################################
         # Step 1: "Remove" the c_i, i.e. the outgoing link of customer i #
         # to do this, set its cluster to c_i, and set its connected customers to c_i
         ##################################################################
-        ci_old = C[c_i]
+        ci_old = C[c_i] # c_i old 是 Matlab index
         # document who it sits with, if obs 1 sit itself it will be ci_old = C[0] = 1
         helper = int(Z_C[c_i][0])  # get the table belonging
         old_conn_customers = table_members[helper - 1]  # for exp: if Z_C[0] = 1, the it is related to index 0
-
+        # old_conn_customer 就是得到老table都有谁
         # new assigned connected customer (assign to itself)
         C[c_i] = c_i + 1  # for exp: C[0] = 0 + 1 = 1
         # new connected customers (table) considering the removal of c_i from C; i.e. C_{-i}
-        new_conn_customers = get_Connections(C, c_i)
+        new_conn_customers = get_Connections(C, c_i) # get connection输入python index返回python index
         # return <index> of the connection
+        # 注意，table member储存的customer都是python形式index
         if len(new_conn_customers) != len(old_conn_customers):
             # Increase number of tables (I think this block works good 09/17/2022)
             K = K + 1
@@ -165,6 +167,7 @@ def sample_ddCRPMM(Y, S_alpha, Psi, type):
         # normalize
         cond_prob = cond_prob / np.sum(cond_prob)
         rand_values = np.random.rand()
+        # rand_values = 0.3
         cond_prob = np.cumsum(cond_prob)  # from pdf to cdf
         helper = np.argwhere(cond_prob > rand_values)
         c_i_sample = np.argwhere(cond_prob > rand_values)[0][0]

@@ -29,4 +29,6 @@ def extract_TableIds(C):
 
     return Z_C[1:, :]
 
-
+if __name__ == '__main__':
+    cur_seat_assignment = np.array([6, 2, 2, 4, 3, 6, 7])
+    print(extract_TableIds(cur_seat_assignment))

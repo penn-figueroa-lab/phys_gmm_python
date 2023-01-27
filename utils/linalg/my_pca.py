@@ -1,9 +1,9 @@
 import numpy as np
 
 
-def my_pca(X):
+def my_pca(X_input):
     # Auxiliary variables
-    X = X.copy()
+    X = np.copy(X_input)
     N = len(X)
     M = len(X[0])
 
@@ -29,4 +29,4 @@ def my_pca(X):
     L = np.diag(L[ids])
     V = V[:, ids]
 
-    return V, L, Mu
+    return V, L, Mu.reshape(-1)

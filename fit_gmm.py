@@ -24,7 +24,7 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
         Xi_dot_ref = Xi_dot_ref[:, ::sub_sample]
 
     if est_type != 1:
-        if est_options.samplerIter != 0:
+        if est_options.samplerIter == 0:
             if est_type == 0:
                 samplerIter = 20
             if est_type == 2:
@@ -41,6 +41,7 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
         # Option1: Non-parametric Clustering with Pos-Vel-cos-sim prior
         if est_options.estimate_l == 1:
             D, mode_hist_D, mean_D = computePairwiseDistance.compute(Xi_ref, 1)
+            # mode_hist_D = 0.2100
             if mode_hist_D == 0:
                 mode_hist_D = mean_D
             sigma = np.sqrt(mode_hist_D / l_sensitivity)  # warning because I haven't implemented full functionality
@@ -72,7 +73,7 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
         # Plot Similarity matrix
         if do_plots:
             title_str = 'Physically-Consistent Similarity Confusion Matrix'
-            plotSimilarityConfMatrix.plot(S, title_str)
+            # plotSimilarityConfMatrix.plot(S, title_str)
 
         # Setting sampler/model options (i.e. hyper-parameters, alpha, Covariance matrix)
         Xi_ref_mean = np.mean(Xi_ref, axis=1, keepdims=True)  # develop note: check dimension
@@ -92,10 +93,13 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
         options.verbose = 1
         # here is the code
         Psi, Psi_Stats = run_ddCRP_sampler(Xi_ref, S, options)
-        est_labels = Psi.Z_C
+        est_labels = Psi.Z_C  # This is estmation result
+
+        np.save('develop_utils/est_labels.npy', est_labels)
+        np.save('develop_utils/Xi_ref.npy', Xi_ref)
 
         # Extract Learnt cluster parameters
-        N = N / sub_sample  # change with sub_sample
+        # N = N / sub_sample  # change with sub_sample
         unique_labels = np.unique(est_labels)
         est_K = len(unique_labels)
         Priors = np.zeros(est_K)
@@ -122,29 +126,43 @@ def fig_gmm(Xi_ref, Xi_dot_ref, est_options):
             for k in np.arange(0, est_K):
                 assigned_k = np.sum(est_labels == unique_labels[k] + 0)
                 Priors[k] = assigned_k / N
-            print(np.sum(Priors))
+
+        # plot_result_3D(Mu, Sigma, Xi_ref)
+        ####################
+        eigens = np.zeros((M, len(Sigma)))
+        for i in np.arange(len(Sigma)):
+            U, S, VT = np.linalg.svd(Sigma[i])
+            eigens[:, i] = S
+        ####################
 
         # Re-estimate GMM parameters, needed for >2D
-        # if M > 2:
-        #     Mu_k = Mu.copy()
-        #     Sigma_k = Sigma.copy()
-        #     for k in np.arange(len(unique_labels)):
-        #         cluster_points = Xi_ref[:, est_labels == unique_labels[k]]
-        #         if len(cluster_points) != 0:
-        #             V_k, L_k, Mu_k[:, k] = my_pca(cluster_points)
-        #             Sigma_k[k] = V_k @ L_k @ V_k.T
-        #     rel_dilation_fact = 0.15
-        #     Sigma_k = adjust_Covariances(Priors, Sigma_k, 1, rel_dilation_fact)
-        #     Mu = Mu_k
-        #     Sigma = Sigma_k
+        if M > 2:
+            Mu_k = np.ones_like(Mu)
+            Sigma_k = np.ones_like(Sigma)
+            for k in np.arange(len(unique_labels)):
+                cluster_points = Xi_ref[:, np.array(est_labels.reshape(-1) == unique_labels[k])]
+                if len(cluster_points) != 0:
+                    V_k, L_k, Mu_k[:, k] = my_pca(cluster_points)
+                    Sigma_k[k] = V_k @ L_k @ V_k.T
+            rel_dilation_fact = 0.15
+            Sigma_k = adjust_Covariances(Priors, Sigma_k, 1, rel_dilation_fact)
+            Mu = Mu_k
+            Sigma = Sigma_k
+
+        #######################################
+        eigens_after = np.zeros((M, len(Sigma)))
+        for i in np.arange(len(Sigma)):
+            U, S, VT = np.linalg.svd(Sigma[i])
+            eigens_after[:, i] = S
+        #######################################
 
         if len(Xi_ref) == 2:
             gmm = GMM(est_K, Priors, Mu.T, Sigma)
-            # plot_result(Xi_ref, gmm, est_K, Mu, len(Xi_ref))
+            plot_result(Xi_ref, gmm, est_K, Mu, len(Xi_ref))
         else:
             plot_result_3D(Mu, Sigma, Xi_ref)
-            # np.save('Mu_3D.npy', Mu)
-            # np.save('Sigma_3D.npy', Sigma)
+            dummy = 1
+
         return Priors, Mu, Sigma
 
 
